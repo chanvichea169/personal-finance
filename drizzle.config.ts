@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { defineConfig } from "drizzle-kit";
+const { defineConfig } = require("drizzle-kit");
 import { accounts } from "./db/schema";
 
 config({ path: ".env.local" });

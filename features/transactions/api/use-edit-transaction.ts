@@ -16,12 +16,16 @@ export const useEditTransaction = (id?: string) => {
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
+      if (!id) {
+        throw new Error("Transaction ID is missing");
+      }
       const response = await client.api.transactions[":id"]["$patch"]({
         param: { id },
         json,
       });
       return await response.json();
     },
+
     onSuccess: () => {
       toast.success("Transaction updated");
       queryClient.invalidateQueries({ queryKey: ["transaction", { id }] });
