@@ -16,9 +16,9 @@ import { Filters } from "@/components/filters";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, MenuItem } from "@mui/material";
-import { getText } from "@/lib/translations"; // Import the getText function
-import Image from "next/image"; // Import the Image component
-import "./style.css"; // Import the CSS file
+import { getText } from "@/lib/translations";
+import Image from "next/image";
+import "./style.css";
 
 export const Header = () => {
   const { isSignedIn } = useUser();
@@ -54,7 +54,7 @@ export const Header = () => {
     <header className="bg-gradient-to-b from-blue-900 to-blue-500 px-6 lg:px-14 pb-36">
       <div className="max-w-screen-2xl mx-auto">
         <div className="w-full flex items-center justify-between mb-14">
-          <div className="flex items-center lg:gap-x-16">
+          <div className="flex items-center mt-3 lg:gap-x-16">
             <HeaderLogo />
             <Navigation language={language} />{" "}
             {/* Pass language state to Navigation */}
@@ -90,12 +90,14 @@ export const Header = () => {
                     width={20}
                     height={20}
                     className="mr-2"
-                  />{" "}
-                  Eng
+                  />
+                  <span className={language.code === "KH" ? "khmer-font" : ""}>
+                    {language.code === "KH" ? "អង់គ្លេស" : "English"}
+                  </span>
                 </MenuItem>
                 <MenuItem
                   onClick={() => handleLanguageChange("KH", "/images/kh.png")}
-                  className="text-lg" // Add text-lg for larger font size
+                  className="text-lg"
                 >
                   <Image
                     src="/images/kh.png"
@@ -103,8 +105,10 @@ export const Header = () => {
                     width={20}
                     height={20}
                     className="mr-2"
-                  />{" "}
-                  KH
+                  />
+                  <span className={language.code === "KH" ? "khmer-font" : ""}>
+                    {language.code === "KH" ? "ភាសាខ្មែរ" : "Khmer"}
+                  </span>
                 </MenuItem>
               </Menu>
               {isSignedIn ? (

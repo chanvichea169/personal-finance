@@ -1,3 +1,5 @@
+import { Khmer } from "next/font/google";
+
 type Translations = {
   [key: string]: {
     [key: string]: string;
@@ -11,7 +13,7 @@ const translations: Translations = {
     getStarted: "Get Started",
     signIn: "Sign In",
     signOut: "Sign Out",
-    language: "Eng",
+    language: "English",
     overview: "Overview",
     transactions: "Transactions",
     accounts: "Accounts",
@@ -20,13 +22,15 @@ const translations: Translations = {
     Expenses: "Expenses",
     Income: "Income",
     Remaining: "Remaining",
+    English: "English",
+    Khmer: "Khmer",
   },
   KH: {
     welcome: "សូមស្វាគមន៍ការត្រឡប់មកវិញ",
     getStarted: "ចាប់ផ្តើម",
     signIn: "ចូល",
     signOut: "ចាកចេញ",
-    language: "ខ្មែរ",
+    language: "ភាសាខ្មែរ",
     overview: "ទិដ្ឋភាព",
     transactions: "ប្រតិបត្តិការ",
     accounts: "គណនី",
@@ -35,6 +39,8 @@ const translations: Translations = {
     Expenses: "ចំណាយ",
     Income: "ចំណូល",
     Remaining: "នៅសល់",
+    English: "អង់គ្លេស",
+    Khmer: "ភាសាខ្មែរ",
   },
 };
 
