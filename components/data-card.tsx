@@ -45,11 +45,12 @@ type IconVariants = VariantProps<typeof iconVariant>;
 
 interface DataCardProps extends BoxVariants, IconVariants {
   icon: IconType;
-  title: string;
+  title: string | React.ReactNode; // Update the type to string | React.ReactNode
   value?: number;
   dateRange: string;
   percetageChange?: number;
 }
+
 export const DataCard = ({
   icon: Icon,
   title,

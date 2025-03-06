@@ -6,8 +6,16 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import { useGetSummary } from "@/features/summary/api/use-get-summary";
 import { formatDateRange } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import { getText } from "@/lib/translations"; // Import the getText function
 
-export const DataGrid = () => {
+type DataGridProps = {
+  language: {
+    code: string;
+    flag: string;
+  };
+};
+
+export const DataGrid = ({ language }: DataGridProps) => {
   const { data, isLoading } = useGetSummary();
 
   const params = useSearchParams();
@@ -19,6 +27,15 @@ export const DataGrid = () => {
   const from = fromParam ? new Date(fromParam) : undefined;
 
   const dateRangLabel = formatDateRange({ to, from });
+
+  const getTextWithClass = (key: string) => {
+    const text = getText(language.code, key);
+    return language.code === "KH" ? (
+      <span className="khmer-font">{text}</span>
+    ) : (
+      text
+    );
+  };
 
   if (isLoading) {
     return (
@@ -33,21 +50,21 @@ export const DataGrid = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-2 mb-8">
       <DataCard
-        title="Remaining"
+        title={getTextWithClass("Remaining")}
         value={data?.remainingAmount}
         percetageChange={data?.remainingChange}
         icon={FaPiggyBank}
         dateRange={dateRangLabel}
       />
       <DataCard
-        title="Income"
+        title={getTextWithClass("Income")}
         value={data?.incomeAmount}
         percetageChange={data?.incomeChange}
         icon={FaArrowTrendUp}
         dateRange={dateRangLabel}
       />
       <DataCard
-        title="Expenses"
+        title={getTextWithClass("Expenses")}
         value={data?.expensesAmount}
         percetageChange={data?.expensesChange}
         icon={FaArrowTrendDown}

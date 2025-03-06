@@ -3,36 +3,40 @@
 import { useMedia } from "react-use";
 import { Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-
 import { NavButton } from "./nav-button";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { getText } from "@/lib/translations"; // Import the getText function
+import "./style.css";
 import { useState } from "react";
 
 const routes = [
   {
     href: "/",
-    label: "Overview",
+    labelKey: "overview",
   },
   {
     href: "/transactions",
-    label: "Transactions",
+    labelKey: "transactions",
   },
   {
     href: "/accounts",
-    label: "Accounts",
+    labelKey: "accounts",
   },
   {
     href: "/categories",
-    label: "Categories",
+    labelKey: "categories",
   },
-  /*   {
-    href: "#",
-    label: "Setting",
-  }, */
 ];
 
-export const Navigation = () => {
+type NavigationProps = {
+  language: {
+    code: string;
+    flag: string;
+  };
+};
+
+export const Navigation = ({ language }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -41,6 +45,15 @@ export const Navigation = () => {
   const onClick = (href: string) => {
     router.push(href);
     setIsOpen(false);
+  };
+
+  const getTextWithClass = (key: string) => {
+    const text = getText(language.code, key);
+    return language.code === "KH" ? (
+      <span className="khmer-font">{text}</span>
+    ) : (
+      text
+    );
   };
 
   if (isMobile) {
@@ -56,7 +69,7 @@ export const Navigation = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="px-2">
-          <nav className="flex flex-col gap-y-2 pt-6">
+          <nav className="flex flex-col gap-x-6 gap-y-2 pt-6">
             {routes.map((route) => (
               <Button
                 key={route.href}
@@ -64,7 +77,7 @@ export const Navigation = () => {
                 onClick={() => onClick(route.href)}
                 className="w-full justify-start"
               >
-                {route.label}
+                {getTextWithClass(route.labelKey)}
               </Button>
             ))}
           </nav>
@@ -73,12 +86,12 @@ export const Navigation = () => {
     );
   }
   return (
-    <nav className="hidden lg:flex items-center gap-x-2 overflow-auto">
+    <nav className="hidden lg:flex items-center gap-x-4 overflow-auto">
       {routes.map((route) => (
         <NavButton
           key={route.href}
           href={route.href}
-          label={route.label}
+          label={getTextWithClass(route.labelKey)}
           isActive={pathname === route.href}
         />
       ))}
