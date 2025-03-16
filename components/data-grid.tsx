@@ -6,7 +6,7 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import { useGetSummary } from "@/features/summary/api/use-get-summary";
 import { formatDateRange } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
-import { getText } from "@/lib/translations"; // Import the getText function
+import { getText } from "@/lib/translations";
 
 type DataGridProps = {
   language: {
@@ -56,6 +56,7 @@ export const DataGrid = ({ language }: DataGridProps) => {
         icon={FaPiggyBank}
         dateRange={dateRangLabel}
       />
+
       <DataCard
         title={getTextWithClass("Income")}
         value={data?.incomeAmount}

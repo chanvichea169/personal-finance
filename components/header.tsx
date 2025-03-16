@@ -56,14 +56,13 @@ export const Header = () => {
         <div className="w-full flex items-center justify-between mb-14">
           <div className="flex items-center mt-3 lg:gap-x-16">
             <HeaderLogo />
-            <Navigation language={language} />{" "}
-            {/* Pass language state to Navigation */}
+            <Navigation language={language} />
           </div>
           <ClerkLoaded>
             <div className="flex items-center gap-x-4">
               <Button
                 onClick={handleClick}
-                className="bg-transparent hover:bg-transparent text-white flex items-center text-lg" // Add text-lg for larger font size
+                className="bg-transparent hover:bg-transparent text-white flex items-center text-md"
               >
                 <Image
                   src={language.flag}
@@ -82,7 +81,7 @@ export const Header = () => {
               >
                 <MenuItem
                   onClick={() => handleLanguageChange("Eng", "/images/uk.png")}
-                  className="text-lg" // Add text-lg for larger font size
+                  className="text-lg"
                 >
                   <Image
                     src="/images/uk.png"
